@@ -8,40 +8,36 @@
     }
     </style>
     <script src="jquery-2.1.3.js"></script>
-
-    <script>
-    
-    </script>
+    <script src="content_script.js"></script>
 </head>
 
 <body style="padding: 2vw;">
-    <form>
+    <form action="#" method="post">
 
         <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" placeholder="Enter your name">
+            <input type="text" class="form-control" name="name" placeholder="Enter your name">
         </div>
 
         <div class="form-group">
             <label>Email</label>
-            <input type="email" class="form-control" placeholder="Enter your email">
+            <input type="email" class="form-control" name="email" placeholder="Enter your email">
         </div>
 
         <div class="form-group">
             <label>GitHub</label>
-            <input type="url" class="form-control" placeholder="Link your GitHub Account">
+            <input type="url" class="form-control" name="github" placeholder="Link your GitHub Account">
         </div>
 
         <div class="form-group">
             <label>LinkedIn</label>
-            <input type="url" class="form-control" placeholder="Link your LinkedIn Account">
+            <input type="url" class="form-control" name="linkedin" placeholder="Link your LinkedIn Account">
         </div>
 
         <div class="form-group">
             <label>Anything else?</label>
-            <textarea type="text" class="form-control" placeholder="List anything you want! For example: past hackathons, languages, favorite color, etc.!" rows="3"></textarea>
+            <textarea type="text" class="form-control" name="other" placeholder="List anything you want! For example: past hackathons, languages, favorite color, etc.!" rows="3"></textarea>
         </div>
-
 
         <button type="submit" class="btn btn-default btn-block btn-primary">Submit</button>
     </form>
