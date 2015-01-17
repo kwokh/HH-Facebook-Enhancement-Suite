@@ -13,7 +13,7 @@
 
 <body style="padding: 2vw;">
 
-    <form style="padding: 1.5vw; background-color:#FAFAFA; border-radius: 2vw;" action="#" method="post">
+    <form style="padding: 1.5vw; background-color:#FAFAFA; border-radius: 2vw;" action="#" method="post" id="registration">
 
         <div class="form-group">
             <label>Name</label>
@@ -40,9 +40,13 @@
             <textarea type="text" class="form-control" name="other" placeholder="List anything you want! For example: past hackathons, languages, favorite color, etc.!" rows="3"></textarea>
         </div>
 
+        <input type="hidden" id="fbusername-input" name="fbusername" value="" />
+
+        <div id="submit-fail" style="display: none" class="alert alert-danger" role="alert"></div>
+
         <button type="submit" class="btn btn-default btn-block btn-primary">Submit</button>
     </form>
-
+    <script src="popup.js"></script>
 </body>
 
 </html>
