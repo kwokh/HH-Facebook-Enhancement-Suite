@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <script src="jquery-2.1.3.js"></script>
+    <script src="jquery.hovercard.min.js"></script>
+</head>
+<body>
+    
+        
+        <label id="demo-basic">John Resig</label>
+    
+
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var hoverHTMLDemoBasic = 'J';
+
+        $("#demo-basic").hovercard({
+            detailsHTML: hoverHTMLDemoBasic,
+            width: 400,
+            cardImgSrc: 'http://ejohn.org/files/short.sm.jpg'
+        });
+    });
+    </script>
+
+    
+
+</body>
+
+
+
+</html>
