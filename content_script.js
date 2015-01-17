@@ -22,18 +22,31 @@ function removeDataHoverCards(){
 	console.log(dataHoverCards);
 	for(var i = 0; i < dataHoverCards.length; i++){
 		console.log ( dataHoverCards[i] );
-		// $(dataHoverCards[i]).attr('name', 'value'); <label id="demo-basic">John Resig</label>
-		//$(dataHoverCards[i]).removeAttr('data-hovercard');
-		//$(dataHoverCards[i]).attr('id', 'hovercard-basic');
-		/*$('#hovercard-basic').parent().css({
-			'overflow' : 'visible'
-		});*/
-		$(dataHoverCards[i]).hovercard({
-            detailsHTML: 'hoverHTMLBasic',
-            width: 1000,
-            height: 1000,
-            cardImgSrc: 'http://ejohn.org/files/short.sm.jpg'
-        });
+		$(dataHoverCards[i]).removeAttr('data-hovercard');
+		// $(dataHoverCards[i]).attr('id', 'hovercard-basic');
+
+		// Bootstrap popover fix
+		$(dataHoverCards[i]).attr('data-content', 'Popover with data-trigger');
+		$(dataHoverCards[i]).attr('rel', 'popover');
+		$(dataHoverCards[i]).attr('data-placement', 'bottom');
+		$(dataHoverCards[i]).attr('data-original-title', 'Title');
+		$(dataHoverCards[i]).attr('data-trigger', "hover");
+		$(dataHoverCards[i]).attr('data-toggle', 'popover');
+		// $(dataHoverCards[i]).css({
+		// 	"overflow" : "visible"
+		// });
+		$("[data-toggle=popover]").popover({container: 'body'});
+
+		// End Bootstrap popover fix
+
+
+
+		
+		// $(dataHoverCards[i]).hovercard({
+  //           detailsHTML: 'hoverHTMLBasic',
+
+  //           cardImgSrc: 'http://ejohn.org/files/short.sm.jpg'
+  //       });
 
 	}
 	// return fbUser = fbUser.substring(fbUser.lastIndexOf('/') + 1);
