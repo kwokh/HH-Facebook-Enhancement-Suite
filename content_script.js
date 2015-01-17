@@ -13,9 +13,30 @@ $(document).ready(function() {
             user: fbUser
         });
     }
+    removeDataHoverCards();
 });
 
+function removeDataHoverCards(){
+	var attributes = $('a');
+	var dataHoverCards = $("a[data-hovercard][href^='https://www.facebook.com/']");
+	console.log(dataHoverCards);
+	for(var i = 0; i < dataHoverCards.length; i++){
+		console.log ( dataHoverCards[i] );
+		// $(dataHoverCards[i]).attr('name', 'value'); <label id="demo-basic">John Resig</label>
+		$(dataHoverCards[i]).removeAttr('data-hovercard');
+		$(dataHoverCards[i]).attr('id', 'hovercard-basic');
+		$(dataHoverCards[i]).css({
+			"overflow": "visible"
+		});
+		$(dataHoverCards[i]).hovercard({
+            detailsHTML: 'hoverHTMLBasic',
+            width: 400,
+            cardImgSrc: 'http://ejohn.org/files/short.sm.jpg'
+        });
 
+	}
+	// return fbUser = fbUser.substring(fbUser.lastIndexOf('/') + 1);
+}
 
 
 // 1. Contact background.js to GET all facebook user's from server and store in map/list in content script
@@ -25,18 +46,18 @@ $(document).ready(function() {
 
 
 // Prepare the hover card with the FBES user's information 
-$(document).ready(function() {
-    var hoverHTMLText = ''; //TODO replace with FBES user's information from callback to background.js
+// $(document).ready(function() {
+//     var hoverHTMLText = ''; //TODO replace with FBES user's information from callback to background.js
 	
-	/*
-    // extra parameters found here: http://designwithpc.com/plugins/hovercard
-    var $demoBasic = $('#demo-basic');
+	
+//     // extra parameters found here: http://designwithpc.com/plugins/hovercard
+//     var $demoBasic = $('#demo-basic');
     
-    if ($demoBasic.length()) {
-        $demoBasic.hovercard({
-            detailsHTML: hoverHTMLText,
-            width: 400,
-        });
-    }
-	*/
-});
+//     if ($demoBasic.length()) {
+//         $demoBasic.hovercard({
+//             detailsHTML: hoverHTMLText,
+//             width: 400,
+//         });
+//     }
+	
+// });
