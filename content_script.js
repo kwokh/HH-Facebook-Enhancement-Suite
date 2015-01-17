@@ -13,6 +13,14 @@ $(document).ready(function() {
             user: fbUser
         });
     }
+
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    	if(request.userList) {
+    		localStorage.setItem('userList', request.userList);
+    	}
+    });
+
+    // add authentication later
 });
 
 

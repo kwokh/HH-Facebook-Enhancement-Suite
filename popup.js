@@ -3,9 +3,6 @@ $('#registration').submit(function(e) {
 		alert(data);
 	});
 	*/
-	var postData = $(this).serializeArray();
-	var formURL = $(this).attr('action');
-	
 	if (localStorage.getItem('fbUser')) {
         $('#fbusername-input').val(localStorage.getItem('fbUser'));
     } else {
@@ -13,6 +10,9 @@ $('#registration').submit(function(e) {
         e.preventDefault();
 		return;
     }
+    
+	var postData = $(this).serializeArray();
+	var formURL = $(this).attr('action');
 	
 	$.ajax({
 		url: formURL,
