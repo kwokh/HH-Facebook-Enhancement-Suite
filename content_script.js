@@ -9,7 +9,9 @@ $(document).ready(function() {
         localStorage.setItem('fbUser', fbUser);
 
         // set extension localStorage in sync with page localStorage
-        chrome.runtime.sendMessage({user: fbUser});
+        chrome.runtime.sendMessage({
+            user: fbUser
+        });
     }
 });
 
@@ -24,12 +26,15 @@ $(document).ready(function() {
 
 // Prepare the hover card with the FBES user's information 
 $(document).ready(function() {
-        var hoverHTMLText = ''; //TODO replace with FBES user's information from callback to background.js
+    var hoverHTMLText = ''; //TODO replace with FBES user's information from callback to background.js
 
-        // extra parameters found here: http://designwithpc.com/plugins/hovercard
-        $("#demo-basic").hovercard({
+    // extra parameters found here: http://designwithpc.com/plugins/hovercard
+    var $demoBasic = $('#demo-basic');
+    
+    if ($demoBasic.length()) {
+        $demoBasic.hovercard({
             detailsHTML: hoverHTMLText,
             width: 400,
         });
-    });
-
+    }
+});
