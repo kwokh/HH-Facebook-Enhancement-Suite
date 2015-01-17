@@ -13,38 +13,28 @@
 
 <body style="padding: 2vw;">
 
-    <form style="padding: 1.5vw; background-color:#FAFAFA; border-radius: 2vw;" action="#" method="post" id="registration">
-
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" name="name" placeholder="Enter your name">
-        </div>
-
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" name="email" placeholder="Enter your email">
-        </div>
+    <form style="padding: 1.5vw; background-color:#FAFAFA; border-radius: 2vw;" action="http://mensajay.com/process.php" method="post" id="registration">
 
         <div class="form-group">
             <label>GitHub</label>
-            <input type="url" class="form-control" name="github" placeholder="Link your GitHub Account">
+            <input type="url" class="form-control" name="github" placeholder="Link your GitHub Account" required>
         </div>
 
         <div class="form-group">
             <label>LinkedIn</label>
-            <input type="url" class="form-control" name="linkedin" placeholder="Link your LinkedIn Account">
+            <input type="url" class="form-control" name="linkedin" placeholder="Link your LinkedIn Account" required>
         </div>
 
         <div class="form-group">
             <label>Anything else?</label>
-            <textarea type="text" class="form-control" name="other" placeholder="List anything you want! For example: past hackathons, languages, favorite color, etc.!" rows="3"></textarea>
+            <textarea type="text" class="form-control" name="other" placeholder="List anything you want! For example: past hackathons, languages, favorite color, etc.!" rows="3" required></textarea>
         </div>
 
         <input type="hidden" id="fbusername-input" name="fbusername" value="" />
 
         <div id="submit-fail" style="display: none" class="alert alert-danger" role="alert"></div>
 
-        <button type="submit" class="btn btn-default btn-block btn-primary">Submit</button>
+        <button type="submit" id="submitBtn" class="btn btn-default btn-block btn-primary">Submit</button>
     </form>
     <script src="popup.js"></script>
 </body>

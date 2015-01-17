@@ -27,7 +27,8 @@ $(document).ready(function() {
 // Prepare the hover card with the FBES user's information 
 $(document).ready(function() {
     var hoverHTMLText = ''; //TODO replace with FBES user's information from callback to background.js
-
+	
+	/*
     // extra parameters found here: http://designwithpc.com/plugins/hovercard
     var $demoBasic = $('#demo-basic');
     
@@ -37,4 +38,5 @@ $(document).ready(function() {
             width: 400,
         });
     }
+	*/
 });
