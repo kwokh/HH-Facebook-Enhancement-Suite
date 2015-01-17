@@ -23,14 +23,15 @@ function removeDataHoverCards(){
 	for(var i = 0; i < dataHoverCards.length; i++){
 		console.log ( dataHoverCards[i] );
 		// $(dataHoverCards[i]).attr('name', 'value'); <label id="demo-basic">John Resig</label>
-		$(dataHoverCards[i]).removeAttr('data-hovercard');
-		$(dataHoverCards[i]).attr('id', 'hovercard-basic');
-		$(dataHoverCards[i]).css({
-			"overflow": "visible"
-		});
+		//$(dataHoverCards[i]).removeAttr('data-hovercard');
+		//$(dataHoverCards[i]).attr('id', 'hovercard-basic');
+		/*$('#hovercard-basic').parent().css({
+			'overflow' : 'visible'
+		});*/
 		$(dataHoverCards[i]).hovercard({
             detailsHTML: 'hoverHTMLBasic',
-            width: 400,
+            width: 1000,
+            height: 1000,
             cardImgSrc: 'http://ejohn.org/files/short.sm.jpg'
         });
 
