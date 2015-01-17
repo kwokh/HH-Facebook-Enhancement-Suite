@@ -1,5 +1,4 @@
 // content_script.js is loaded after the page is loaded, so jquery can be used.
-//TODO possibly restrict content_script.js use to only https://facebook.com/groups/* by adding the restriction to manifest.json 'matches' field.
 
 
 // Scrap the user ID from the Facebook banner
