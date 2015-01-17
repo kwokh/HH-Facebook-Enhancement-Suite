@@ -1,37 +1,56 @@
 <html>
-	<head>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	</head>
-	<body style="padding: 2vw;">
-		<form>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body style="padding: 2vw;">
+
+	<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '738603209569944',
+			xfbml      : true,
+			version    : 'v2.2'
+		});
+	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<form>
 		
-		  <div class="form-group">
+		<div class="form-group">
 			<label>Name</label>
 			<input type="text" class="form-control" placeholder="Enter your name">
-		  </div>
-		  
-		  <div class="form-group">
+		</div>
+		
+		<div class="form-group">
 			<label>Email</label>
 			<input type="email" class="form-control" placeholder="Enter your email">
-		  </div>
-		  
-		  <div class="form-group">
+		</div>
+		
+		<div class="form-group">
 			<label>GitHub</label>
 			<input type="url" class="form-control" placeholder="Link your GitHub Account">
-		  </div>
-		  
-		  <div class="form-group">
+		</div>
+		
+		<div class="form-group">
 			<label>LinkedIn</label>
 			<input type="url" class="form-control" placeholder="Link your LinkedIn Account">
-		  </div>
-		  
+		</div>
+		
 		<div class="form-group">
 			<label>Anything else?</label>
 			<textarea type="text" class="form-control" placeholder="List anything you want! For example: past hackathons, languages, favorite color, etc.!" rows="3" ></textarea>
-		 </div>
-		 
-		  
-		  <button type="submit" class="btn btn-default btn-block btn-primary">Submit</button>
-		</form>
-	</body>
+		</div>
+		
+		
+		<button type="submit" class="btn btn-default btn-block btn-primary">Submit</button>
+	</form>
+</body>
 </html>
