@@ -23,6 +23,9 @@ chrome.runtime.onConnect.addListener(function(port) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     
     if (request.user) { localStorage.setItem('fbUser', request.user)};
+    if(request.likes) {
+    	localStorage.setItem('likedLinks', request.likes);
+    }
 });
 
 chrome.alarms.create('updateUserList', {

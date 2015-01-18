@@ -10,7 +10,7 @@
         ]
     },
     "permissions": [
-        "activeTab", "storage", "alarms"
+        "activeTab", "storage", "alarms", "tabs"
     ],
     "browser_action": {
         "default_title": "Facebook Enhancement Suite",
@@ -19,7 +19,7 @@
     },
     "content_scripts": [{
         "js": [ "jquery-2.1.3.js", "jquery.hovercard.min.js", "bootstrap.js", "content_script.js" ],
-        "matches": [ "https://*/*", "http://*/*]"],
+        "matches": [ "https://*/*", "http://*/*"],
         "css": ["fbaddon.css"]
     }],
     "manifest_version": 2,

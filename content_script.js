@@ -11,7 +11,7 @@ $(document).ready(function() {
     $popoverDiv.hover(function() {
         clearTimeout(fadeTimer);
     }, function() {
-    	$popoverDiv.fadeOut(200);
+        $popoverDiv.fadeOut(200);
     });
 
 
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     removeDataHoverCards();
 
-
+    saveLikedPosts();
 });
 
 function getUserByUsername(username, callback) {
@@ -65,18 +65,18 @@ function removeDataHoverCards() {
     var $dataHoverCards = $("a[data-hovercard][href^='https://www.facebook.com/']");
 
     $dataHoverCards.hover(function(e) {
-
+        if (fadeTimer) clearTimeout(fadeTimer);
         var username = $(this).attr('href');
         var indexOfQuestionMark = username.indexOf('?');
 
         if (indexOfQuestionMark === -1) username = username.substring(username.lastIndexOf('/') + 1);
         else username = username.substring(username.lastIndexOf('/') + 1, indexOfQuestionMark);
-        console.log(username);
+        //console.log(username);
 
         if (isUserExistInList(username)) {
 
             getUserByUsername(username, function(data) {
-                console.log(data);
+                //console.log(data);
                 $('#addon-github').text(data.github);
                 $('#addon-linkedin').text(data.linkedIn);
                 $('#addon-tagline').text(data.tagline);
@@ -123,11 +123,55 @@ function removeDataHoverCards() {
     // return fbUser = fbUser.substring(fbUser.lastIndexOf('/') + 1);
 }
 
-
+// Bad code follows
 function saveLikedPosts() {
     var likeLinks = $('.UFILikeLink');
     likeLinks.click(function() {
-
+        if (!localStorage.getItem('likedLinks')) localStorage.setItem('likedLinks', JSON.stringify([]));
+        if ($(this).attr('data-reactid').match(/comment[0-9]{3,}/g)) {
+            var comment = $(this).attr('data-reactid').match(/_[0-9]{3,}/g)[0].substring(1);
+            if ($(this).attr('title').substring(0, 4) === 'Like') {
+                //console.log(comment);
+                var parsedArr = JSON.parse(localStorage.getItem('likedLinks'));
+                parsedArr.push(comment);
+                localStorage.setItem('likedLinks', JSON.stringify(parsedArr));
+            } else {
+                //console.log(comment);
+                var linksArr = JSON.parse(localStorage.getItem('likedLinks'));
+                var i;
+                for (i = 0; i < linksArr.length; i++) {
+                    if (comment === linksArr[i]) break;
+                }
+                if (i < linksArr.length) {
+                    linksArr.splice(i, 1);
+                    localStorage.setItem('likedLinks', JSON.stringify(linksArr));
+                }
+            }
+        } else {
+            var form = $(this).parents('form:first');
+            var comment = $("input[name='feedback_params']", form)[0];
+            //console.log(comment);
+            comment = $(comment).attr('value');
+            comment = JSON.parse(comment)['target_fbid'];
+            if ($(this).attr('title').substring(0, 4) == 'Like') {
+                var parsedArr = JSON.parse(localStorage.getItem('likedLinks'));
+                parsedArr.push(comment);
+                localStorage.setItem('likedLinks', JSON.stringify(parsedArr));
+            } else {
+                var linksArr = JSON.parse(localStorage.getItem('likedLinks'));
+                var i;
+                for (i = 0; i < linksArr.length; i++) {
+                    if (comment === linksArr[i]) break;
+                }
+                if (i < linksArr.length) {
+                    linksArr.splice(i, 1);
+                    localStorage.setItem('likedLinks', JSON.stringify(linksArr));
+                }
+            }
+        }
+        chrome.runtime.sendMessage({
+            likes: localStorage.getItem('likedLinks')
+        });
     });
 }
 
