@@ -23,21 +23,26 @@ function removeDataHoverCards(){
 	for(var i = 0; i < dataHoverCards.length; i++){
 		console.log ( dataHoverCards[i] );
 		$(dataHoverCards[i]).removeAttr('data-hovercard');
-		// $(dataHoverCards[i]).attr('id', 'hovercard-basic');
+		// // $(dataHoverCards[i]).attr('id', 'hovercard-basic');
 
-		// Bootstrap popover fix
-		$(dataHoverCards[i]).attr('data-content', 'Popover with data-trigger');
-		$(dataHoverCards[i]).attr('rel', 'popover');
-		$(dataHoverCards[i]).attr('data-placement', 'bottom');
-		$(dataHoverCards[i]).attr('data-original-title', 'Title');
-		$(dataHoverCards[i]).attr('data-trigger', "hover");
-		$(dataHoverCards[i]).attr('data-toggle', 'popover');
-		// $(dataHoverCards[i]).css({
-		// 	"overflow" : "visible"
+		// // Bootstrap popover fix
+		// $(dataHoverCards[i]).attr('data-content', 'Popover with data-trigger');
+		// $(dataHoverCards[i]).attr('rel', 'popover');
+		// $(dataHoverCards[i]).attr('data-placement', 'bottom');
+		// $(dataHoverCards[i]).attr('data-original-title', 'Title');
+		// $(dataHoverCards[i]).attr('data-trigger', "hover");
+		// $(dataHoverCards[i]).attr('data-toggle', 'popover');
+		// //$(dataHoverCards[i]).attr("selector", "body", "padding": 0);
+		// // $(dataHoverCards[i]).css({
+		// // 	"overflow" : "visible"
+		// // });
+		// $("[data-toggle=popover]").popover({
+		// 	template: '<div class="popover special-class"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
 		// });
-		$("[data-toggle=popover]").popover({container: 'body'});
 
-		// End Bootstrap popover fix
+		// $('.popover').css({'left': '0px'});
+
+		// // End Bootstrap popover fix
 
 
 
