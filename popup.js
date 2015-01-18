@@ -317,13 +317,5 @@ $('#registration').submit(function(e) {
       Plugin.call($form, $form.data())
     })
   })
-
+  
 }(jQuery);
-
-
-
-
-
-
-
-
