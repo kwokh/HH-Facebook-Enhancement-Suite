@@ -14,7 +14,14 @@ $(document).ready(function() {
         });
     }
     removeDataHoverCards();
+
+
 });
+
+function getUserByUsername(username, callback) {
+	// keys: firstName, lastName, linkedin, github, tagline, facebookID
+	$.getJSON('http://mensajay.com/fetch.php?fbusername=' + username, callback(data));
+}
 
 function removeDataHoverCards(){
 	var attributes = $('a');
@@ -57,6 +64,13 @@ function removeDataHoverCards(){
 	// return fbUser = fbUser.substring(fbUser.lastIndexOf('/') + 1);
 }
 
+
+function saveLikedPosts() {
+	var likeLinks = $('.UFILikeLink');
+	likeLinks.click(function() {
+		
+	});
+}
 
 // 1. Contact background.js to GET all facebook user's from server and store in map/list in content script
 // 2. target w/ jquery data-hovercard's and for each fbid's on the page, find the list/map's matching values
