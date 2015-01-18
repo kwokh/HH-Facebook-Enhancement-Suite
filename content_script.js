@@ -63,7 +63,7 @@ function removeDataHoverCards(){
 function saveLikedPosts() {
 	var likeLinks = $('.UFILikeLink');
 	likeLinks.click(function() {
-		chrome.storage.local.set({'likes': });
+		
 	});
 }
 
