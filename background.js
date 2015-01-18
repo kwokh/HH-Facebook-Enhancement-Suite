@@ -1,13 +1,28 @@
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.user) { localStorage.setItem('fbUser', request.user); 
-		sendResponse({abc: 'lololol'});
-	}
-    if (request.username) {
-        $.getJSON('http://mensajay.com/fetch.php?fbusername=' + request.username, function(data) {
-        	console.log(data);
-            sendResponse({json: data});
+chrome.runtime.onConnect.addListener(function(port) {
+  
+  console.assert(port.name == "mainport");
+
+  port.onMessage.addListener(function(msg) {
+
+    if (msg.username){
+
+    	$.getJSON('http://mensajay.com/fetch.php?fbusername=' + msg.username, function(data) {
+            
+            port.postMessage({json: data});
         });
+      	
     }
+    if (msg.user){
+    	port.postMessage({abc: 'sub bruh'});
+    }
+  });
+});
+
+
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    
+    if (request.user) { localStorage.setItem('fbUser', request.user)};
 });
 
 chrome.alarms.create('updateUserList', {

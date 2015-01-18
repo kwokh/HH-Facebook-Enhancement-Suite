@@ -3,22 +3,26 @@
 
 // Scrap the user ID from the Facebook banner
 $(document).ready(function() {
+	
 	var $popoverDiv = $('<div class="addon-popover"><p id="addon-github"></p><p id="addon-linkedin"></p><p id="addon-tagline"></p></div>');
+	
 	$('body').append($popoverDiv);
+	
 	console.log($popoverDiv);
+    
+
     if (!localStorage.getItem('fbUser')) {
+        
         var fbUser = $("a[title='Profile']").attr('href');
+        
         fbUser = fbUser.substring(fbUser.lastIndexOf('/') + 1);
         localStorage.setItem('fbUser', fbUser);
 
         // set extension localStorage in sync with page localStorage
         chrome.runtime.sendMessage({
             user: fbUser
-        }, function(response) {
-        	console.log('first one');
         });
     }
-
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     	if(request.userList) localStorage.setItem('userList', JSON.stringify(request.userList));
     });
@@ -31,25 +35,39 @@ $(document).ready(function() {
 function getUserByUsername(username, callback) {
 	// keys: firstName, lastName, linkedin, github, tagline, facebookID
 	//console.log('inside get user by username');
-	chrome.runtime.sendMessage({
-		username: username
-	}, function(response) {
-		console.log('response');
-		callback(response.json);
+	var port = chrome.runtime.connect({name: "mainport"});
+	port.postMessage({username: username});
+	
+	port.onMessage.addListener(function(response) {
+	  	callback(response.json);
 	});
+
+
+	// chrome.runtime.sendMessage({
+	// 	username: username
+	// }, function(response) {
+	// 	console.log('does this happen');
+	// 	callback(response.json);
+	// 	console.log('no callback occurred')
+	// });
 }
 
 function removeDataHoverCards() {
+	
 	var $dataHoverCards = $("a[data-hovercard][href^='https://www.facebook.com/']");
+	
 	$dataHoverCards.hover(function(e) {
+		
 		var username = $(this).attr('href');
 		var indexOfQuestionMark = username.indexOf('?');
+		
 		if(indexOfQuestionMark === -1) username = username.substring(username.lastIndexOf('/') + 1);
 		else username = username.substring(username.lastIndexOf('/') + 1, indexOfQuestionMark);
 		console.log(username);
-		if(isUserExistInList(username)) {	
+
+		if(isUserExistInList(username)) {
+
 			getUserByUsername(username, function(data) {
-				console.log(data);
 				$('#addon-github').text(data.github);
 				$('#addon-linkedin').text(data.linkedin);
 				$('#addon-tagline').text(data.tagline);
