@@ -3,6 +3,9 @@
 
 // Scrap the user ID from the Facebook banner
 $(document).ready(function() {
+	var $popoverDiv = $('<div class="addon-popover"><p id="addon-github"></p><p id="addon-linkedin"></p><p id="addon-tagline"></p></div>');
+	$('body').append($popoverDiv);
+	console.log($popoverDiv);
     if (!localStorage.getItem('fbUser')) {
         var fbUser = $("a[title='Profile']").attr('href');
         fbUser = fbUser.substring(fbUser.lastIndexOf('/') + 1);
@@ -11,8 +14,15 @@ $(document).ready(function() {
         // set extension localStorage in sync with page localStorage
         chrome.runtime.sendMessage({
             user: fbUser
+        }, function(response) {
+        	console.log('first one');
         });
     }
+
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    	if(request.userList) localStorage.setItem('userList', JSON.stringify(request.userList));
+    });
+
     removeDataHoverCards();
 
 
@@ -20,16 +30,35 @@ $(document).ready(function() {
 
 function getUserByUsername(username, callback) {
 	// keys: firstName, lastName, linkedin, github, tagline, facebookID
-	$.getJSON('http://mensajay.com/fetch.php?fbusername=' + username, callback(data));
+	//console.log('inside get user by username');
+	chrome.runtime.sendMessage({
+		username: username
+	}, function(response) {
+		console.log('response');
+		callback(response.json);
+	});
 }
 
-function removeDataHoverCards(){
-	var attributes = $('a');
-	var dataHoverCards = $("a[data-hovercard][href^='https://www.facebook.com/']");
-	console.log(dataHoverCards);
-	for(var i = 0; i < dataHoverCards.length; i++){
-		console.log ( dataHoverCards[i] );
-		$(dataHoverCards[i]).removeAttr('data-hovercard');
+function removeDataHoverCards() {
+	var $dataHoverCards = $("a[data-hovercard][href^='https://www.facebook.com/']");
+	$dataHoverCards.hover(function(e) {
+		var username = $(this).attr('href');
+		var indexOfQuestionMark = username.indexOf('?');
+		if(indexOfQuestionMark === -1) username = username.substring(username.lastIndexOf('/') + 1);
+		else username = username.substring(username.lastIndexOf('/') + 1, indexOfQuestionMark);
+		console.log(username);
+		if(isUserExistInList(username)) {	
+			getUserByUsername(username, function(data) {
+				console.log(data);
+				$('#addon-github').text(data.github);
+				$('#addon-linkedin').text(data.linkedin);
+				$('#addon-tagline').text(data.tagline);
+				$('.addon-popover').css('display', 'block');
+			})
+		}
+	}, function(e) {
+		$('.addon-popover').css('display', 'none');
+	});
 		// // $(dataHoverCards[i]).attr('id', 'hovercard-basic');
 
 		// // Bootstrap popover fix
@@ -60,7 +89,7 @@ function removeDataHoverCards(){
   //           cardImgSrc: 'http://ejohn.org/files/short.sm.jpg'
   //       });
 
-	}
+	
 	// return fbUser = fbUser.substring(fbUser.lastIndexOf('/') + 1);
 }
 
@@ -70,6 +99,16 @@ function saveLikedPosts() {
 	likeLinks.click(function() {
 		
 	});
+}
+
+// bad function
+function isUserExistInList(username) {
+	var list = JSON.parse(localStorage.getItem('userList'));
+	console.log(list);
+	for(var i = 0; i < list.length; i++) {
+		if(username === list[i]) return true;
+	}
+	return false;
 }
 
 // 1. Contact background.js to GET all facebook user's from server and store in map/list in content script

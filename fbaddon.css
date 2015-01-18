@@ -1,0 +1,10 @@
+.addon-popover {
+	position: fixed;
+	top: 7%;
+	left: 0.5%;
+	background-color: #2980b9;
+	color: #ffffff;
+	height: auto;
+	width: 19%;
+	border-radius: 5px;
+}
